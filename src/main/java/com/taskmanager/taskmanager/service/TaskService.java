@@ -8,13 +8,15 @@ import java.util.List;
 
 public interface TaskService {
 
-    public List<Task> tasks();
 
-    public void addTask(TaskDTO task);
 
-    public Task getTask(int id);
+    List<TaskDTO> getTasks();
 
-    public void updateTask(TaskDTO task);
+    void addTask(TaskDTO task);
 
-    public void addSubTask(SubTaskDTO subTaskDTO);
+    Task getTask(Long id);
+
+    void updateTask(TaskDTO task);
+
+    void addSubTask(SubTaskDTO subTaskDTO);
 }

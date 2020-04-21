@@ -15,9 +15,6 @@ public class TaskRepository {
 
     public TaskRepository(){
         tasks = new ArrayList<>();
-        tasks.add(new Task("task_1","tast_1",LocalDateTime.of(2020,6,1,8,30), 1));
-        tasks.add(new Task("task_1","tast_1",LocalDateTime.of(2020,6,1,8,30), 2));
-        tasks.add(new Task("task_3","tast_1",LocalDateTime.of(2020,6,1,8,30), 3));
     }
 
     public List<Task> getTasks(){

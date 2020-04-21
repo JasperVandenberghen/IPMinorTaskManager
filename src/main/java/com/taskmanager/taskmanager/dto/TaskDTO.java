@@ -13,7 +13,7 @@ public class TaskDTO {
     @NotEmpty
     private LocalDateTime datum;
     @NotEmpty
-    private int id;
+    private Long id;
 
     public String getTitel() {
         return titel;
@@ -39,11 +39,13 @@ public class TaskDTO {
         this.datum = LocalDateTime.parse(datum);
     }
 
-    public int getId() {
+    public void setDatumNotString(LocalDateTime localDateTime){this.datum = localDateTime;}
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

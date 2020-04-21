@@ -23,12 +23,12 @@ public class TaskController {
 
     @GetMapping
     public String getTasks(Model model){
-        model.addAttribute("tasks", taskService.tasks());
+        model.addAttribute("tasks", taskService.getTasks());
         return "tasks";
     }
 
     @GetMapping("/{id}")
-    public String getTask(Model model, @PathVariable("id") Integer id){
+    public String getTask(Model model, @PathVariable("id") Long id){
 
         model.addAttribute("task", taskService.getTask(id) );
         return "task";
@@ -46,7 +46,7 @@ public class TaskController {
     }
 
     @GetMapping("/edit/{id}")
-    public String getUpdate(Model model, @PathVariable("id") Integer id){
+    public String getUpdate(Model model, @PathVariable("id") Long id){
         model.addAttribute("task", taskService.getTask(id) );
         return "edit";
     }
@@ -64,7 +64,7 @@ public class TaskController {
 
 
     @GetMapping("/{id}/sub/create")
-    public String getCreateSubTask(Model model, @PathVariable("id") Integer id){
+    public String getCreateSubTask(Model model, @PathVariable("id") Long id){
         model.addAttribute("id", id );
         return "createSubTask";
     }

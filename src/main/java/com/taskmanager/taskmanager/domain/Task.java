@@ -27,9 +27,9 @@ public class Task {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
 
-    public Task(String titel, String beschrijving, LocalDateTime datum, int id){
+    public Task(String titel, String beschrijving, LocalDateTime datum, Long id){
         setTitel(titel);
         setBeschrijving(beschrijving);
         setDatum(datum);
@@ -65,11 +65,11 @@ public class Task {
     }
 
     @Id
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

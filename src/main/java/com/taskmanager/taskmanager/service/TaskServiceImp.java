@@ -4,65 +4,73 @@ import com.taskmanager.taskmanager.domain.SubTask;
 import com.taskmanager.taskmanager.domain.Task;
 import com.taskmanager.taskmanager.dto.SubTaskDTO;
 import com.taskmanager.taskmanager.dto.TaskDTO;
-import com.taskmanager.taskmanager.repository.TaskRepository;
+import com.taskmanager.taskmanager.repository.TaskRepoJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImp implements TaskService {
 
-    private final TaskRepository taskRepository;
-    private int taskId; // houd de laatste ID voor tasks bij. als je een nieuwe task maakt dan pakt hij de huidige ID+1. zo ben je zeker dat je nooit 2 tasks hebt met dezelfde ID.
+    private final TaskRepoJPA taskRepository;
+    private int taskId;
 
     @Autowired
-    public TaskServiceImp(TaskRepository taskRepository){
+    public TaskServiceImp(TaskRepoJPA taskRepository){
         this.taskRepository = taskRepository;
-        taskId = 3; // TODO deze moet normaal vanaf 0 beginnen maar omdat er 3 dummy tasks zijn moet dit met 3 beginnen
+        taskId = 0;
     }
 
     @Override
-    public List<Task> tasks() {
-        return taskRepository.getTasks();
+    public List<TaskDTO> getTasks() {
+        return taskRepository.findAll().stream().map(h -> {
+            TaskDTO dto = new TaskDTO();
+            dto.setBeschrijving(h.getBeschrijving());
+            dto.setDatumNotString(h.getDatum());
+            dto.setTitel(h.getTitel());
+            dto.setId(h.getId());
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     @Override
     public void addTask(TaskDTO taskDTO) {
         taskId++;
-        taskRepository.addTask(new Task(
-                taskDTO.getTitel() ,
-                taskDTO.getBeschrijving() ,
-                taskDTO.getDatum(),
-                taskId)
-        );
+        Task task = new Task();
+        task.setBeschrijving(taskDTO.getBeschrijving());
+        task.setTitel(taskDTO.getTitel());
+        task.setDatum(taskDTO.getDatum());
+        task.setId((long) taskId);
+        taskRepository.save(task);
     }
 
     @Override
-    public Task getTask(int id){
-        return taskRepository.getTask(id);
+    public Task getTask(Long id){
+        return taskRepository.getOne(id);
     }
 
     @Override
     public void updateTask(TaskDTO taskDTO) {
 
-        taskRepository.updateTask(new Task(
+        /*taskRepository.updateTask(new Task(
                 taskDTO.getTitel() ,
                 taskDTO.getBeschrijving() ,
                 taskDTO.getDatum(),
                 taskDTO.getId() )
-        );
+        );*/
 
     }
 
     @Override
     public void addSubTask(SubTaskDTO subTaskDTO) {
-        taskRepository.addSubTask(new SubTask(
+        /*taskRepository.addSubTask(new SubTask(
                 subTaskDTO.getTitel(),
                 subTaskDTO.getBeschrijving()
         ),
                 subTaskDTO.getId()
-        );
+        );*/
     }
 
 }

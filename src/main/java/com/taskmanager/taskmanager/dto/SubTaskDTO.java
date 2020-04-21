@@ -11,7 +11,7 @@ public class SubTaskDTO {
     @Size(min=3)
     private String titel, beschrijving;
     @NotEmpty
-    private int id;
+    private Long id;
 
     private TaskDTO taskDTO;
 
@@ -36,11 +36,11 @@ public class SubTaskDTO {
         this.beschrijving = beschrijving;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
