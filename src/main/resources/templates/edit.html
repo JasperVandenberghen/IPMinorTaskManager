@@ -9,7 +9,10 @@
     <title>Edit Task</title>
 </head>
 <body>
-
+<header id="nav" class="nav">
+    <a href="/">Overview</a></li>
+    <a href="/tasks/new">Create Task</a>
+</header>
 <form action="/tasks/edit" method="post" th:if="${task!=null}">
     <h2>Update Task</h2>
     <input type="hidden" name="id" th:value="*{task.id}">

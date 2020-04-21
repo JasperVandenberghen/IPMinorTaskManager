@@ -9,11 +9,14 @@
     <title>Tasks</title>
 </head>
 <body>
-
+<header id="nav" class="nav">
+    <a href="/">Overview</a></li>
+    <a href="/tasks/new">Create Task</a>
+</header>
 
 <div class="task">
     <h1>Task Overview</h1>
-    <table th:if="${tasks!=null and !tasks.empty}">
+    <table th:if="${tasks!=null and !tasks.isEmpty()}">
         <title>Task Overview</title>
         <thead>
         <tr>

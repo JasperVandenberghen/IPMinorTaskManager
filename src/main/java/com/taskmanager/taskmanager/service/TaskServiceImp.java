@@ -6,6 +6,7 @@ import com.taskmanager.taskmanager.dto.SubTaskDTO;
 import com.taskmanager.taskmanager.dto.TaskDTO;
 import com.taskmanager.taskmanager.repository.TaskRepoJPA;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +16,11 @@ import java.util.stream.Collectors;
 public class TaskServiceImp implements TaskService {
 
     private final TaskRepoJPA taskRepository;
-    private int taskId;
+    private int taskId = 0;
 
     @Autowired
     public TaskServiceImp(TaskRepoJPA taskRepository){
         this.taskRepository = taskRepository;
-        taskId = 0;
     }
 
     @Override

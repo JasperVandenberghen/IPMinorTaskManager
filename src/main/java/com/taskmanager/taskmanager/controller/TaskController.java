@@ -57,10 +57,7 @@ public class TaskController {
         return "redirect:/tasks/"+taskDTO.getId();
     }
 
-    @RequestMapping("/tasks")
-    public String getHome(){
-        return "home";
-    }
+
 
 
     @GetMapping("/{id}/sub/create")
