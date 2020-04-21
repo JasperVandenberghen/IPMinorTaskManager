@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <title>Tasks</title>
+</head>
+<body>
+
+
+<div class="task">
+    <h1>Task Overview</h1>
+    <table th:if="${tasks!=null and !tasks.empty}">
+        <title>Task Overview</title>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="*{task.titel}"></td>
+            <td th:text="|due *{task.datum.getDayOfMonth()} *{task.datum.getMonth().toString().toLowerCase()} at *{task.datum.getHour()}:*{task.datum.getMinute()}|"></td>
+        </tr>
+        </tbody>
+    </table>
+    <h2 th:if="${tasks==null or tasks.isEmpty()}">No tasks left to do</h2>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <title>Edit Task</title>
+</head>
+<body>
+
+<form action="/tasks/edit" method="post" th:if="${task!=null}">
+    <h2>Update Task</h2>
+    <input type="hidden" name="id" th:value="*{task.id}">
+    <div class="form-group">
+        <label for="titel">Titel</label>
+        <input type="text" class="form-control" id="titel" name="titel" placeholder="title" th:value="*{task.titel}">
+    </div>
+
+    <div class="form-group">
+        <label for="beschrijving">Beschrijving</label>
+        <textarea class="form-control" id="beschrijving" name="beschrijving" rows="3" th:text="*{task.beschrijving}"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="datum">Date</label>
+        <input type="datetime-local" class="form-control" id="datum" name="datum" th:value="*{task.datum}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+<h2 th:if="${task==null}">Task not found</h2>
+
+
+</body>
+</html>
