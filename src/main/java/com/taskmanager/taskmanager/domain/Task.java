@@ -1,5 +1,7 @@
 package com.taskmanager.taskmanager.domain;
 
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

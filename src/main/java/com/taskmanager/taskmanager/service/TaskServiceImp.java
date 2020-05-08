@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class TaskServiceImp implements TaskService {
 
     private final TaskRepoJPA taskRepository;
-    private int taskId = 0;
+  //  private int taskId = 0;
 
     @Autowired
     public TaskServiceImp(TaskRepoJPA taskRepository){
@@ -37,12 +37,12 @@ public class TaskServiceImp implements TaskService {
 
     @Override
     public void addTask(TaskDTO taskDTO) {
-        taskId++;
+     //   taskId++;
         Task task = new Task();
         task.setBeschrijving(taskDTO.getBeschrijving());
         task.setTitel(taskDTO.getTitel());
         task.setDatum(taskDTO.getDatum());
-        task.setId((long) taskId);
+       // task.setId((long) taskId);
         taskRepository.save(task);
     }
 
