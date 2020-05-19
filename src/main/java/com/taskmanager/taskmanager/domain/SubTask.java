@@ -21,13 +21,13 @@ public class SubTask {
     @ManyToOne
     private Task task;
 
-    public SubTask(Task task, String title, String desciption){
+    public SubTask(Task task, String title, String description){
         this.setTask(task);
         this.setTitel(title);
-        this.setBeschrijving(desciption);
+        this.setBeschrijving(description);
     }
 
-    public SubTask(String title, String desciption){
+    public SubTask(String title, String description){
         super();
     }
 
