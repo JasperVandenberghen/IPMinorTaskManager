@@ -4,37 +4,55 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <title>Tasks</title>
+    <title th:text="#{tasks}"></title>
 </head>
 <body>
 <header id="nav" class="nav">
-    <a href="/">Overview</a></li>
-    <a href="/tasks/new">Create Task</a>
+    <a href="/" th:text="#{overview}"></a></li>
+    <a href="/tasks/new" th:text="#{createtask}"></a>
+    <span th:text="#{lang.change}"></span>:
+    <select id="locales">
+        <option value=""></option>
+        <option value="en" th:text="#{lang.en}"></option>
+        <option value="nl" th:text="#{lang.nl}"></option>
+    </select>
 </header>
 
 <div class="task">
-    <h1>Task Overview</h1>
+    <h1 th:text="#{taskoverview}"></h1>
     <table th:if="${tasks!=null}">
-        <title>Task Overview</title>
+        <title th:text="#{taskoverview}"></title>
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Date</th>
+            <th th:text="#{name}"></th>
+            <th th:text="#{date}"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="task : ${tasks}">
             <td th:text="*{task.titel}"></td>
             <td th:text="|due *{task.datum.getDayOfMonth()} *{task.datum.getMonth().toString()} at *{task.datum.getHour()}:*{task.datum.getMinute()}|"></td>
-            <td><a th:href="@{tasks/{id} (id=${task.id})}">Show</a></td>
+            <td><a th:href="@{tasks/{id} (id=${task.id})}" th:text="#{show}"></a></td>
         </tr>
         </tbody>
     </table>
-    <h2 th:if="${tasks==null or tasks.isEmpty()}">No tasks left to do</h2>
+    <h2 th:if="${tasks==null or tasks.isEmpty()}" th:text="#{notasksleft}"></h2>
 </div>
 
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                window.location.replace('?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
 </html>
