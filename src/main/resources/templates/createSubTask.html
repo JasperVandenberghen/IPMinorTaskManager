@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
 
-    <title th:text="#{newsubtask}">New SubTask</title>
+    <title th:text="#{newsubtask}"></title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
     </select>
 </header>
 <form action="/tasks/sub/create" method="post">
-    <h2 th:text="#{newsubtask}">New SubTask</h2>
+    <h2 th:text="#{newsubtask}"></h2>
     <div class="form-group">
         <label for="titel" th:text="#{title}"></label>
         <input type="text" class="form-control" id="titel" name="titel" placeholder="title" required>
