@@ -1,16 +1,18 @@
-package com.taskmanager.taskmanager.dto;
+package com.taskmanager.dto;
 
-import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
 public class SubTaskDTO {
 
     @NotEmpty
-    @Size(min=3)
+    @Size(min=1)
     private String titel, beschrijving;
-    @NotEmpty
+
+
     private Long id;
 
     private TaskDTO taskDTO;

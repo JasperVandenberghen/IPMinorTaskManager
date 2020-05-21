@@ -19,8 +19,12 @@
     <div th:if="${task!=null}">
         <h2 th:text="*{task.titel}"></h2>
         <p th:text="*{task.beschrijving}"></p>
+        <td><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}">Create subtask</a></td>
+        <td><a th:href="@{/tasks/edit/{id}(id=${task.id})}">Edit task</a></td>
+
         <section th:each="subTask : ${task.subTasks}">
-            <h4 th:text="*{subTask.titel}"></h4>
+            <h4>Subtasks:</h4>
+            <p th:text="*{subTask.titel}"></p>
             <p th:text="*{subTask.beschrijving}"></p>
         </section>
         <p th:text="|due *{task.datum.getDayOfMonth()} *{task.datum.getMonth().toString().toLowerCase()} at *{task.datum.getHour()}:*{task.datum.getMinute()}|"></p>

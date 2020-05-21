@@ -16,7 +16,7 @@
 
 <div class="task">
     <h1>Task Overview</h1>
-    <table th:if="${tasks!=null and !tasks.isEmpty()}">
+    <table th:if="${tasks!=null}">
         <title>Task Overview</title>
         <thead>
         <tr>
@@ -27,7 +27,8 @@
         <tbody>
         <tr th:each="task : ${tasks}">
             <td th:text="*{task.titel}"></td>
-            <td th:text="|due *{task.datum.getDayOfMonth()} *{task.datum.getMonth().toString().toLowerCase()} at *{task.datum.getHour()}:*{task.datum.getMinute()}|"></td>
+            <td th:text="|due *{task.datum.getDayOfMonth()} *{task.datum.getMonth().toString()} at *{task.datum.getHour()}:*{task.datum.getMinute()}|"></td>
+            <td><a th:href="@{tasks/{id} (id=${task.id})}">Show</a></td>
         </tr>
         </tbody>
     </table>

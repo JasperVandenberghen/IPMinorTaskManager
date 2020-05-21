@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
 
     <title>New Task</title>
@@ -14,24 +14,25 @@
     <a href="/">Overview</a></li>
     <a href="/tasks/new">Create Task</a>
 </header>
-<form action="/tasks/new" method="post">
+<form action="/tasks/new" method="post" th:object="${taskDTO}">
     <h2>New Task</h2>
     <div class="form-group">
-        <label for="titel">Titel</label>
-        <input type="text" class="form-control" id="titel" name="titel" placeholder="title">
+        <label for="titel">Titel:</label>
+        <input type="text" class="form-control" id="titel" name="titel" th:field="*{titel}">
+        <p th:errors="*{titel}"></p>
     </div>
 
     <div class="form-group">
-        <label for="beschrijving">Beschrijving</label>
-        <textarea class="form-control" id="beschrijving" name="beschrijving" rows="3"></textarea>
+        <label for="beschrijving">Beschrijving:</label>
+        <textarea class="form-control" id="beschrijving" name="beschrijving" rows="2"></textarea>
     </div>
 
     <div class="form-group">
         <label for="datum">Date</label>
-        <input type="datetime-local" class="form-control" id="datum" name="datum">
+        <input type="datetime-local" class="form-control" id="datum" name="datum" th:field="*{datum}">
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <input type="submit" value="Create task">
 </form>
 
 </body>

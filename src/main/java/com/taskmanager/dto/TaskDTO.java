@@ -1,19 +1,33 @@
-package com.taskmanager.taskmanager.dto;
+package com.taskmanager.dto;
 
+import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskDTO {
 
     @NotEmpty
-    @Size(min=3)
+    @Size(min=1)
     private String titel,beschrijving;
-    @NotEmpty
+
     private LocalDateTime datum;
-    @NotEmpty
+
+
     private Long id;
+
+    private List<SubTaskDTO> subTasks = new ArrayList<>();
+
+    public List<SubTaskDTO> getSubTasks() {
+        return subTasks;
+    }
+
+    public void setSubTasks(List<SubTaskDTO> subTasks) {
+        this.subTasks = subTasks;
+    }
 
     public String getTitel() {
         return titel;

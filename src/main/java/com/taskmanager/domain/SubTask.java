@@ -1,4 +1,4 @@
-package com.taskmanager.taskmanager.domain;
+package com.taskmanager.domain;
 
 
 
@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 public class SubTask {
 
     @NotEmpty
-    @Size(min=3)
+    @Size(min=1)
     private String titel, beschrijving;
     @Id
     @GeneratedValue
@@ -34,7 +34,7 @@ public class SubTask {
     public SubTask() {
     }
 
-    private void setTask(Task task) {
+    public void setTask(Task task) {
         this.task = task;
     }
 
@@ -56,5 +56,13 @@ public class SubTask {
 
     public void setBeschrijving(String beschrijving) {
         this.beschrijving = beschrijving;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

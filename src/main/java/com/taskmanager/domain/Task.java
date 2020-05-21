@@ -1,14 +1,10 @@
-package com.taskmanager.taskmanager.domain;
+package com.taskmanager.domain;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,24 +13,23 @@ import java.util.List;
 public class Task {
 
     @NotEmpty
-    @Size(min=3)
+    @Size(min=1)
     private String titel,beschrijving;
-    @NotEmpty
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime datum;
 
-    @OneToMany
+    @OneToMany(mappedBy="task")
     private List<SubTask> subTasks = new ArrayList<>();;
 
     @Id
     @GeneratedValue
     private Long id;
 
-    public Task(String titel, String beschrijving, LocalDateTime datum, Long id){
+    public Task(String titel, String beschrijving, LocalDateTime datum){
         setTitel(titel);
         setBeschrijving(beschrijving);
         setDatum(datum);
-        setId(id);
 
     }
 
@@ -65,7 +60,6 @@ public class Task {
         this.datum = datum;
     }
 
-    @Id
     public Long getId() {
         return id;
     }
