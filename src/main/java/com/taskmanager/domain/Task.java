@@ -1,5 +1,6 @@
 package com.taskmanager.domain;
 
+import com.taskmanager.dto.SubTaskDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -19,8 +20,8 @@ public class Task {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime datum;
 
-    @OneToMany(mappedBy="task")
-    private List<SubTask> subTasks = new ArrayList<>();;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<SubTask> subTasks;
 
     @Id
     @GeneratedValue
@@ -74,5 +75,17 @@ public class Task {
     }
     public List<SubTask> getSubTasks() {
         return subTasks;
+    }
+
+    public List<SubTaskDTO> getSubTasksDTO(){
+        List<SubTaskDTO> subTaskDTOS = new ArrayList<>();
+        for(SubTask s : getSubTasks()){
+            SubTaskDTO sdto = new SubTaskDTO();
+            sdto.setBeschrijving(s.getBeschrijving());
+            sdto.setId(s.getId());
+            sdto.setTitel(s.getTitel());
+            subTaskDTOS.add(sdto);
+        }
+        return subTaskDTOS;
     }
 }

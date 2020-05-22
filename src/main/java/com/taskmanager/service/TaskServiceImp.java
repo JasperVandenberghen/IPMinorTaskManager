@@ -16,24 +16,27 @@ import java.util.stream.Collectors;
 public class TaskServiceImp implements TaskService {
 
     private final TaskRepoJPA taskRepository;
-    private final SubTaskRepoJPA subTaskRepo;
+
 
     @Autowired
-    public TaskServiceImp(TaskRepoJPA taskRepository, SubTaskRepoJPA subTaskRepo){
+    public TaskServiceImp(TaskRepoJPA taskRepository){
         this.taskRepository = taskRepository;
-        this.subTaskRepo = subTaskRepo;
+
     }
 
     @Override
     public List<TaskDTO> getTasks() {
+
         return taskRepository.findAll().stream().map(h -> {
             TaskDTO dto = new TaskDTO();
             dto.setBeschrijving(h.getBeschrijving());
             dto.setDatumNotString(h.getDatum());
             dto.setTitel(h.getTitel());
             dto.setId(h.getId());
+            dto.setSubTasks(h.getSubTasksDTO());
             return dto;
         }).collect(Collectors.toList());
+
     }
 
     @Override

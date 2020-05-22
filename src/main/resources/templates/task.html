@@ -27,9 +27,9 @@
         <td><a th:href="@{/tasks/{id}/sub/create(id=${task.id})}" th:text="#{createsubtask}"></a></td>
         <td><a th:href="@{/tasks/edit/{id}(id=${task.id})}" th:text="#{edittask}"></a></td>
 
-        <section th:each="subTask : ${task.subTasks}">
+        <section th:each="subTask : ${task.getSubTasksDTO()}">
             <h4 th:text="#{subtasks}">:</h4>
-            <p th:text="*{subTask.titel}"></p>
+            <h5 th:text="*{subTask.titel}"></h5>
             <p th:text="*{subTask.beschrijving}"></p>
         </section>
         <p th:text="|due *{task.datum.getDayOfMonth()} *{task.datum.getMonth().toString().toLowerCase()} at *{task.datum.getHour()}:*{task.datum.getMinute()}|"></p>

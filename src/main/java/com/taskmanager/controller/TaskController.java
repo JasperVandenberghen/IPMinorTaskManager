@@ -53,6 +53,7 @@ public class TaskController {
     @GetMapping("/edit/{id}")
     public String getUpdate(Model model, @PathVariable("id") Long id){
         model.addAttribute("task", taskService.getTask(id) );
+        model.addAttribute("subTask", new SubTaskDTO());
         model.addAttribute("id", id );
         return "edit";
     }
