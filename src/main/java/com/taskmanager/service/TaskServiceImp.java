@@ -26,7 +26,6 @@ public class TaskServiceImp implements TaskService {
 
     @Override
     public List<TaskDTO> getTasks() {
-
         return taskRepository.findAll().stream().map(h -> {
             TaskDTO dto = new TaskDTO();
             dto.setBeschrijving(h.getBeschrijving());

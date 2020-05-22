@@ -8,9 +8,11 @@ import com.taskmanager.service.TaskService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Lazy;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,22 +23,8 @@ public class TaskServiceTest {
     @Autowired
     private TaskService taskService;
 
-    @Test
-    public void testGetTasks(){
-        TaskDTO taskDTO = new TaskDTO();
-        taskDTO.setTitel("boodschappen");
-        taskDTO.setBeschrijving("collect & go");
-        taskDTO.setDatumNotString(LocalDateTime.of(2020,5,22,11,0));
-        taskService.addTask(taskDTO);
 
-        List<TaskDTO> tasks = taskService.getTasks();
 
-        assertNotNull(tasks);
-        assertFalse(tasks.isEmpty());
-        assertEquals(1, tasks.size());
-        TaskDTO task = tasks.get(0);
-        assertNotNull(task);
-    }
     @Transactional
     @Test
     public void testGetTask(){
@@ -113,5 +101,31 @@ public class TaskServiceTest {
         taskService.addSubTask(subTaskDTO);
 
         assertNotEquals(0, taskService.getTask(taskDTO.getId()).getSubTasks().size());
+    }
+
+    @Test
+    public void testGetTasks(){
+        TaskDTO taskDTO = new TaskDTO();
+        taskDTO.setId(1L);
+        taskDTO.setTitel("boodschappen");
+        taskDTO.setBeschrijving("collect & go");
+        taskDTO.setDatumNotString(LocalDateTime.of(2020,5,22,11,0));
+        List<SubTaskDTO> subTaskDTOS = new ArrayList<>();
+        SubTaskDTO subTaskDTO = new SubTaskDTO();
+        subTaskDTO.setBeschrijving("test");
+        subTaskDTO.setTitel("test");
+        subTaskDTO.setId(1L);
+        subTaskDTOS.add(subTaskDTO);
+        taskDTO.setSubTasks(subTaskDTOS);
+        taskService.addTask(taskDTO);
+
+
+        List<TaskDTO> tasks = taskService.getTasks();
+
+        assertNotNull(tasks);
+        assertFalse(tasks.isEmpty());
+        assertEquals(1, tasks.size());
+        TaskDTO task = tasks.get(0);
+        assertNotNull(task);
     }
 }
